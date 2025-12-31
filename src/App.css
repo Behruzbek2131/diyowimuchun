@@ -1,0 +1,236 @@
+* {
+  box-sizing: border-box;
+  
+}
+
+/* Fon */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #1a1a1a, #000);
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+/* Quti */
+.gift-box {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg) rotateY(45deg);
+  transition: transform 1s ease;
+  cursor: pointer;
+}
+
+/* .gift-box.open {
+  transform: rotateX(-20deg) rotateY(225deg);
+} */
+
+/* Quti devorlari */
+.box-face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: #d00000;
+  border: 2px solid #b90000;
+  opacity: 0.96;
+  backface-visibility: hidden;
+}
+
+/* Tasmalar */
+.box-face::before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 100%;
+  background: #ffb703;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.front  { transform: translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); background: #800000; }
+
+/* Qopqoq */
+.lid {
+  position: absolute;
+  width: 220px;
+  height: 40px;
+  top: -20px;
+  left: -10px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 10;
+}
+
+.gift-box.open .lid {
+  transform: translateY(-120px) rotateX(80deg);
+}
+
+.lid-face {
+  position: absolute;
+  background: #e63946;
+  border: 1px solid #b90000;
+}
+
+.lid-top {
+  width: 220px;
+  height: 220px;
+  background: #f12b3c;
+  transform: rotateX(90deg) translateZ(110px);
+}
+
+.lid-front { width: 220px; height: 40px; transform: translateZ(110px); }
+.lid-back  { width: 220px; height: 40px; transform: rotateY(180deg) translateZ(110px); }
+.lid-left  { width: 220px; height: 40px; transform: rotateY(-90deg) translateZ(110px); }
+.lid-right { width: 220px; height: 40px; transform: rotateY(90deg) translateZ(110px); }
+
+/* Ichidagi yozuv */
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  text-align: center;
+  background: #fff;
+  padding: 14px;
+  border-radius: 14px;
+
+  transform: translate(-50%, -50%) translateZ(1px);
+  opacity: 0;
+
+  transition: all 0.6s ease;
+  pointer-events: none;
+  z-index: 50;
+}
+
+
+/* OCHILGANDA KO‘RINADI */
+.message.show {
+  opacity: 1;
+  transform: translate(-50%, -120%) translateZ(160px) scale(1.15);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+}
+
+.message h2 {
+  margin: 0;
+  color: #d00000;
+}
+
+.message p {
+  margin: 6px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+.message span {
+  font-size: 22px;
+}
+
+/* Pastdagi hint */
+.hint {
+  margin-top: 140px;
+  color: #aaa;
+  font-family: sans-serif;
+}
+
+
+/* ===================== */
+/* 📱 MOBILE ADAPTATSIYA */
+/* ===================== */
+
+@media (max-width: 600px) {
+
+  .container {
+    perspective: 800px;
+  }
+
+  .gift-box {
+    width: 150px;
+    height: 150px;
+    transform: rotateX(-18deg) rotateY(35deg);
+  }
+
+  /* Quti devorlari */
+  .box-face {
+    width: 150px;
+    height: 150px;
+  }
+
+  .front  { transform: translateZ(75px); }
+  .back   { transform: rotateY(180deg) translateZ(75px); }
+  .left   { transform: rotateY(-90deg) translateZ(75px); }
+  .right  { transform: rotateY(90deg) translateZ(75px); }
+  .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+  /* Ribbon */
+  .box-face::before {
+    width: 28px;
+  }
+
+  /* Qopqoq */
+  .lid {
+    width: 170px;
+    height: 32px;
+    top: -16px;
+    left: -10px;
+  }
+
+  .gift-box.open .lid {
+    transform: translateY(-90px) rotateX(75deg);
+  }
+
+  .lid-top {
+    width: 170px;
+    height: 170px;
+    transform: rotateX(90deg) translateZ(85px);
+  }
+
+  .lid-front,
+  .lid-back,
+  .lid-left,
+  .lid-right {
+    width: 170px;
+    height: 32px;
+    transform: translateZ(85px);
+  }
+
+  .lid-back  { transform: rotateY(180deg) translateZ(85px); }
+  .lid-left  { transform: rotateY(-90deg) translateZ(85px); }
+  .lid-right { transform: rotateY(90deg) translateZ(85px); }
+
+  /* Ichidagi yozuv */
+  .message {
+    width: 90%;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .message.show {
+    transform: translate(-50%, -130%) translateZ(120px) scale(1.05);
+  }
+
+  .message h2 {
+    font-size: 16px;
+  }
+
+  .message p {
+    font-size: 13px;
+  }
+
+  .message span {
+    font-size: 18px;
+  }
+
+  .hint {
+    margin-top: 100px;
+    font-size: 13px;
+  }
+}
